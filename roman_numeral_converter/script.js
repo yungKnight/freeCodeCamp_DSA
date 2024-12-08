@@ -7,20 +7,38 @@ const convertInput = (numberInput) => {
     case 1: 
       return "I"
       break;
+    case 4: 
+      return "IV"
+      break;
     case 5: 
       return "V"
+      break;
+    case 9: 
+      return "IX"
       break;
     case 10: 
       return "X"
       break;
+    case 40: 
+      return "XL"
+      break;
     case 50: 
       return "L"
+      break;
+    case 90: 
+      return "XC"
       break;
     case 100: 
       return "C"
       break;
+    case 400: 
+      return "CD"
+      break;
     case 500: 
       return "D"
+      break;
+    case 900: 
+      return "CM"
       break;
     case 1000: 
       return "M"
