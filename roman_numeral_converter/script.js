@@ -2,68 +2,139 @@ const convertBtn = document.getElementById("convert-btn");
 const input = document.getElementById("number");
 const result = document.getElementById("output");
 
+const romanBasicValues = [
+  {
+    number: 1,
+    value: "I"
+  },
+
+  {
+    number: 4,
+    value: "IV",
+  },
+
+  {
+    number: 5,
+    value: "V",
+  },
+
+  {
+    number: 9,
+    value: "IX",
+  },
+
+  {
+    number: 10,
+    value: "X",
+  },
+
+  {
+    number: 40,
+    value: "XL",
+  },
+
+  {
+    number: 50,
+    value: "L",
+  },
+
+  {
+    number: 90,
+    value: "XC",
+  },
+
+  {
+    number: 100,
+    value: "C",
+  },
+
+  {
+    number: 400,
+    value: "CD",
+  },
+
+  {
+    number: 500,
+    value: "D",
+  },
+
+  {
+    number: 900,
+    value: "CM",
+  },
+
+  {
+    number: 1000,
+    value: "M",
+  },
+]
+
+const calculateRomanNumValue = (numberInput) => {
+  if (numberInput >= 1 && numberInput < 4000) {
+    let remaining = numberInput;
+    let romanResult = "";
+
+    for (const { number, value } of romanBasicValues.slice().reverse()) {
+      while (remaining >= number) {
+        romanResult += value;
+        remaining -= number;
+      }
+    }
+    return romanResult;
+  } else {
+    return "";
+  }
+};
+
+console.log(calculateRomanNumValue(2623))
+
 const convertInput = (numberInput) => {
   switch (numberInput) {
-    case 1: 
-      return "I"
-      break;
-    case 4: 
-      return "IV"
-      break;
-    case 5: 
-      return "V"
-      break;
-    case 9: 
-      return "IX"
-      break;
-    case 10: 
-      return "X"
-      break;
-    case 40: 
-      return "XL"
-      break;
-    case 50: 
-      return "L"
-      break;
-    case 90: 
-      return "XC"
-      break;
-    case 100: 
-      return "C"
-      break;
-    case 400: 
-      return "CD"
-      break;
-    case 500: 
-      return "D"
-      break;
-    case 900: 
-      return "CM"
-      break;
-    case 1000: 
-      return "M"
-      break;
+    case 1:
+      return "I";
+    case 4:
+      return "IV";
+    case 5:
+      return "V";
+    case 9:
+      return "IX";
+    case 10:
+      return "X";
+    case 40:
+      return "XL";
+    case 50:
+      return "L";
+    case 90:
+      return "XC";
+    case 100:
+      return "C";
+    case 400:
+      return "CD";
+    case 500:
+      return "D";
+    case 900:
+      return "CM";
+    case 1000:
+      return "M";
     default:
-      return ""
+      return calculateRomanNumValue(numberInput);
   }
-}
+};
 
 const confirmValidInput = (numberInput) => {
-  console.log(numberInput)
-
-  if (numberInput.length === 0 ) {
-    result.innerText = "Please enter a valid number"
-  } else if (numberInput < 1) {
-    result.innerText = "Please enter a number greater than or equal to 1"
-  } else if (numberInput >= 4000) {
-    result.innerText = "Please enter a number less than or equal to 3999"
+  const parsedInput = parseInt(numberInput);
+  if (isNaN(parsedInput)) {
+    result.innerText = "Please enter a valid number";
+  } else if (parsedInput < 1) {
+    result.innerText = "Please enter a number greater than or equal to 1";
+  } else if (parsedInput >= 4000) {
+    result.innerText = "Please enter a number less than or equal to 3999";
   } else {
-    result.innerText = convertInput(parseInt(numberInput));
+    result.innerText = convertInput(parsedInput);
   }
-}
+};
 
 convertBtn.addEventListener("click", () => {
-  const numberInput = input.value; 
-
+  const numberInput = input.value;
   confirmValidInput(numberInput);
 });
